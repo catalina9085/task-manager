@@ -1,0 +1,43 @@
+body{
+	background-image: url('/images/app3.jpg'); 
+		background-size: cover;
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+}
+h1{
+	font-size:4rem;
+	font-family: "Lucida Handwriting", "Brush Script MT", cursive;
+
+}
+button{
+	border-radius: 25px;
+			background-color:#40403E;
+			color:white;
+			border: none;
+			cursor: pointer;
+			padding:6px;
+			margin: 2px;
+			box-shadow:0 4px 8px rgba(0,0,0,0.2);
+			transition: all 0.3s ease-in-out;
+	width:100px;
+}
+
+button:hover {
+		background-color: #8C8C8B;
+		color:black;
+	}
+
+#buttons{
+	display:flex;
+	gap:5px;
+	
+}
+
+.container{
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
+}

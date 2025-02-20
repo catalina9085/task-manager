@@ -1,0 +1,7 @@
+com\catalina\taskmanager\ManagerControllerIntegrationTest.class
+com\catalina\taskmanager\AdminControllerIntegrationTest.class
+com\catalina\taskmanager\MailServiceTest.class
+com\catalina\taskmanager\SettingsControllerIntegrationTest.class
+com\catalina\taskmanager\TaskControllerIntegrationTest.class
+com\catalina\taskmanager\AuthControllerIntegrationTest.class
+com\catalina\taskmanager\TaskRepositoryTest.class

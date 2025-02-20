@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+	<link rel="stylesheet" href="/css/basePage.css">
+	<style>
+		.userContainer{
+			padding:5px;
+			background-color:rgba(255,255,255,0.1);
+			border-radius: 10px;
+			box-shadow:0 4px 8px rgba(0,0,0,0.1);
+			border-bottom:3px;
+		}
+	</style>
+</head>
+<body th:style="'background-color: ' +${backgroundColor}">
+	
+	<div class="container">
+		
+	<h1>Manager Section</h1>
+	<p>Welcome to the manager section.Here you can set, delete or edit users tasks.</p><br><hr><br>
+	
+		<div th:each="user :${users}" class="userContainer">
+			<p><strong>Username:</strong><span th:text="${user.username}">username here</span></p>
+			<p><strong>Email:</strong><span th:text="${user.email}">email here</span></p>
+			
+			<form th:action="@{/manager/showTasksForUser}" method="get">
+				<input type="hidden" name="username" th:value="${user.username}">
+				<button type="submit">show tasks</button>
+			</form>
+			<hr>
+		</div><br><br>
+			
+	<form th:action="@{/main}" method="get">
+		<button type="submit">main page</button>
+	</form>
+	
+</div>
+</body>
+</html>

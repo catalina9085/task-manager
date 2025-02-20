@@ -1,0 +1,76 @@
+body {
+	    background-image: url('/images/app3.jpg'); 
+		background-size: cover;
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	h1{
+		text-align:center;
+		font-size:3rem;
+	}
+	.container {
+		color:white;
+		backdrop-filter:blur(5px);
+		background-color: rgba(0, 0, 0, 0.3);
+		padding: 100px;
+		border-radius: 10px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);	
+		display:flex;
+		flex-direction:column;
+		justify-content:center;
+		align-items: center;
+		width:500px;
+		height:350px;
+
+	}
+	#form,#registerForm{
+		display:flex;
+		flex-direction:column;
+		justify-content:center;
+		align-items: center;
+	}
+	input {
+			padding:8px;
+		    border: 1px solid #ddd;
+		    border-radius: 5px;
+		    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+		    outline: none;
+		    transition: all 0.3s ease-in-out;
+			margin:5px;
+			background-color:transparent;
+			color:white;
+			width:200px;
+		}
+		input::placeholder{
+			color:white;
+		}
+	button{
+		border-radius: 25px;
+		background-color:#40403E;
+		color:white;
+		border: none;
+		cursor: pointer;
+		padding:6px;
+		margin: 2px;
+		box-shadow:0 4px 8px rgba(0,0,0,0.2);
+		transition: all 0.3s ease-in-out;
+
+	}
+	button:hover {
+		background-color: #8C8C8B;
+		color:black;
+	}
+	
+	.buttonClass{
+		background:transparent;
+		width:auto;
+		box-shadow:none;
+	}
+	.buttonClass:hover{
+		color:black;
+	}
+	span{
+		color:#595958;
+	}

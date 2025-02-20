@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Filtered task list</title>
+	<link rel="stylesheet" href="/css/basePage.css">
+	<style>
+			.userContainer{
+				padding:5px;
+				background-color:rgba(255,255,255,0.1);
+				border-radius: 10px;
+				box-shadow:0 4px 8px rgba(0,0,0,0.1);
+				border-bottom:3px;
+			}
+		</style>
+</head>
+
+<body th:style="'background-color: ' +${backgroundColor}">
+	<div class="container" style="width:80%;">
+	<h1>Filtered task list</h1><br><br>
+	
+	<div th:each="task: ${tasks}" class="userContainer">
+		<p><strong style="color: #808080;">Title:</strong><span th:text="${task.title}">Task Title</span></p>
+		<p th:if="${task.description!=null and !#strings.isEmpty(task.description)}"><strong style="color: #808080;">Description:</strong><span th:text="${task.description}">Task Description</span></p>
+		<p th:if="${task.deadline!=null}"><strong style="color: #808080;">Time left:</strong><span th:text="${task.timeLeft}">Task time left</span></p>
+		<p th:if="${task.category!=null and !#strings.isEmpty(task.category)}"><strong style="color: #808080;">Category:</strong><span th:text="${task.category}">Task category</span></p>
+		
+		<form th:action="@{/main/delete/{id}(id=${task.id})}" method="post" style="display:inline;">
+			<button type="submit">Delete</button>
+		</form>
+		
+		<form th:action="@{/main/update/{id}(id=${task.id})}" method="get" style="display:inline;">
+			<button type="submit">Edit</button>
+		</form>
+		<hr>
+	</div><br><br>
+	<form th:action="@{/main}" method="get">
+				<button type="submit">Go back</button>
+	</form>
+</div>
+</body>
+
+</html>

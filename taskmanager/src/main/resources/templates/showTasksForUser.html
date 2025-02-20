@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+	<link rel="stylesheet" href="/css/basePage.css">
+	<style>
+			.userContainer{
+				padding:5px;
+				background-color:rgba(255,255,255,0.1);
+				border-radius: 10px;
+				box-shadow:0 4px 8px rgba(0,0,0,0.1);
+				border-bottom:3px;
+			}
+		    </style>
+</head>
+<body th:style="'background-color: ' +${backgroundColor}">
+	<div class="container" style="width:80%;">
+	<h1>Task list</h1><br><br>
+	<p><strong>Username:</strong><span th:text="${username}">username here</span></p>
+	<form th:action="@{/manager/showTasksForUser/addTask}" method="get">
+		<input type="hidden" name="username" th:value="${username}">
+		<button type="submit">add new task</button>
+	</form><hr><br><br>
+	
+	<div th:each="task:${tasks}" class="userContainer">
+		<p><strong>Title:</strong><span th:text="${task.title}">title here</span></p>
+		<p th:if="${task.description!=null and !#strings.isEmpty(task.description)}"><strong>Description:</strong><span th:text="${task.description}">description here</span></p>
+		<p th:if="${task.deadline!=null}"><strong>Time left:</strong><span th:text="${task.timeLeft}">time left here</span></p>
+		<p th:if="${task.category!=null and !#strings.isEmpty(task.category)}"><strong>Category:</strong><span th:text="${task.category}">category here</span></p>
+		<p><strong>Completed:</strong><span th:text="${task.completed}">title here</span></p>
+		
+		<div style="display:flex; gap:10px;">
+			<form th:action="@{/manager/showTasksForUser/edit}" method="get">
+				<input type="hidden" name="id" th:value="${task.id}">
+				<input type="hidden" name="username" th:value="${username}">
+				<button type=submit>edit</button>
+			</form>
+			<form th:action="@{/manager/showTasksForUser/delete}" method="post">
+				<input type="hidden" name="id" th:value="${task.id}">
+				<input type="hidden" name="username" th:value="${username}">
+				<button type=submit>delete</button>
+			</form>
+		</div>
+	</div>
+	<br><br>
+	<form th:action="@{/manager}" method="get">
+		<button type="submit">go back</button>
+	</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+	<link rel="stylesheet" href="css/mainPage.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body th:style="'background-color: ' +${backgroundColor}">
+	<div class="container">
+	        <h1>Task List</h1>
+
+	        
+	        <div class="button-bar">
+	            <div>
+	                <form th:action="@{/main/add}" method="get">
+	                    <button type="submit">Add New Task</button>
+	                </form>
+
+	                <div th:if="${roles.contains('ADMIN')}">
+	                    <form th:action="@{/admin}" method="get">
+	                        <button type="submit">Admin Section</button>
+	                    </form>
+	                </div>
+
+	                <div th:if="${roles.contains('MANAGER')|| roles.contains('ADMIN')}">
+	                    <form th:action="@{/manager}" method="get">
+	                        <button type="submit">Manager Section</button>
+	                    </form>
+	                </div>
+	            </div>
+
+	            <div>
+	                <form th:action="@{/settings}" method="get" style="display: inline;">
+	                    <button type="submit">Settings</button>
+	                </form>
+
+	                <form th:action="@{/logout}" method="post" style="display: inline;">
+	                    <button type="submit">Log Out</button>
+	                </form>
+	            </div>
+				
+	        </div>
+
+	        <hr>
+
+	        
+	        <div th:if="${tasks.size()!=0}" class="filter-form">
+	            <form th:action="@{/main/category}" method="get">
+	                <input type="text" id="category" name="category" placeholder="Filter by category" required>
+	                <button type="submit">Apply</button>
+	            </form>
+	        </div>
+
+	        <div th:if="${tasks.size()==0}">There are no tasks at the moment.</div>
+	        <div th:each="task : ${tasks}" class="task-container">
+	            <div>
+	                <div class="task-details">
+	                    <p><strong>Title:</strong> <span th:text="${task.title}">Task Title</span></p>
+	                    <p th:if="${task.description != null and !#strings.isEmpty(task.description)}"><strong>Description:</strong> <span th:text="${task.description}">Task Description</span></p>
+	                    <p th:if="${task.deadline != null}"><strong>Time Left:</strong> <span th:text="${task.timeLeft}">Task time left</span></p>
+	                    <p th:if="${task.category != null and !#strings.isEmpty(task.category)}"><strong>Category:</strong> <span th:text="${task.category}">Task Category</span></p>
+	                </div>
+					<div class="task-actions">
+					    <form th:action="@{/main/delete/{id}(id=${task.id})}" method="post">
+					       <button type="submit"><i class="fas fa-trash"></i></button>
+					    </form>
+					    <form th:action="@{/main/update/{id}(id=${task.id})}" method="get">
+					       <button type="submit"><i class="fas fa-pencil-alt"></i></button>
+					    </form>
+					</div>
+	            </div>
+
+	            <div class="task-checkbox">
+	                <form th:action="@{/main/toggle/{id}(id=${task.id})}" method="post">
+	                    <input type="checkbox" th:checked="${task.completed}" onchange="this.form.submit()">
+	                </form>
+	            </div>
+	        </div>
+	    </div>
+   
+</body>
+</html>

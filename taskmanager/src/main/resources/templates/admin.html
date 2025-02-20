@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+	<link rel="stylesheet" href="/css/basePage.css">
+</head>
+<body th:style="'background-color: ' +${backgroundColor}">
+	<div class="container">
+	<h1>Admin page</h1>
+	<br><strong>Welcome to the admin section!Here you can manage user roles.</strong><br>
+	<span>(If none of the checkboxes are selected, the "USER" role will be assigned by default.)</span><br><hr>
+	
+	<p th:if="${message}"><span th:text="${message}">message here</span></p>
+	
+	<form th:action="@{/admin/addUser}" method="get">
+		<button type="submit">add new user</button>
+	</form><br>
+	
+	<div th:each="user : ${users}" class="userContainer">
+		
+		<p><strong>Id:</strong><span th:text="${user.id}">id here</span></p>
+		<p><strong>Username:</strong><span th:text="${user.username}">username here</span></p>
+		<p><strong>Email:</strong><span th:text="${user.email}">email here</span></p>
+		<p><strong>Roles:</strong><span th:each="role : ${user.roles}" th:text="${role+'  '}">role here</span></p>
+		
+		<form th:action="@{/admin/setRoles}" method="post">
+			
+			<div style="display:flex; gap:10px;">
+				
+				<label>
+					<input type="checkbox" name="roles" value="ADMIN"
+						th:checked="${user.roles.contains('ADMIN')}"/> admin
+				</label>
+				
+			    <label>
+			        <input type="checkbox" name="roles" value="MANAGER"
+			            th:checked="${user.roles.contains('MANAGER')}"/> manager
+			    </label>
+				
+			   	<label>
+			        <input type="checkbox" name="roles" value="USER"
+			            th:checked="${user.roles.contains('USER')}"/> user
+			    </label>
+				<input type="hidden" name="id" th:value="${user.id}">
+			
+			<button type="submit">set roles</button>
+		</div>
+			
+		</form>
+		
+		<form th:action="@{/admin/delete}" method="post">
+			<input type="hidden" name="id" th:value="${user.id}">
+			<button type="submit">delete user</button>
+		</form>
+		<hr>
+	</div>
+	<br><br>
+	<form th:action="@{/main}" method="get">
+			<button type="submit">main page</button>
+	</form>
+</div>
+</body>
+</html>

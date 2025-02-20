@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+	<link rel="stylesheet" type="text/css" href="/css/authPage.css">
+</head>
+<body>
+	<br><br>
+	<div class="container">
+		
+    <h1>Login</h1>
+	
+	<p th:if="${verified}"> Your account is now verified.You can log in.</p><br>
+	<p th:if="${changedPassword}"> Your password has been successfully changed.</p><br>
+    
+	<form th:action="@{/login}" method="post" id="form">
+        <input type="text" id="username" name="username" required placeholder="Username/Email">
+        <input type="password" id="password" name="password" required placeholder="Password">
+        <button type="submit" style="width:200px;">Login</button>
+    </form>
+	<br>
+	
+	<div th:if="${param.error}">
+		        <p style="color:#8B0000;" th:text="${param.error}">Error message</p>
+	</div>
+	<br>
+	<form th:action="@{/register}" method="get">
+		<span>You dont't have an account yet?</span>
+		<button type="submit" class="buttonClass">Register </button>
+	</form>
+	
+	<form th:action="@{/resetPassword}" method="get">
+		<span>Did you forget your password?</span>
+		<button type="submit" class="buttonClass">Reset password</button>
+	</form>
+	
+</div>
+	
+		
+</body>
+</html>

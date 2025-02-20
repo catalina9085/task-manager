@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+	<link rel="stylesheet" type="text/css" href="/css/authPage.css">
+</head>
+
+<body>
+	<br><br>
+	<div class="container">
+		
+    <h1>Register</h1>
+
+    <form id="registerForm" th:action="@{/register}" method="post">
+        <input type="text" id="username" name="username" required placeholder="Username">
+
+		<input type="email" id="email" name="email" required placeholder="Email">
+				
+        <input type="password" id="password" name="password" required placeholder="Password">
+
+		<input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm password">
+
+        <button type="submit" style="width:200px;">Register</button>
+    </form>
+	<br><br>
+	<div th:if="${email}">
+				<span>Your account has been created.You can verify your account now,or log and verify later.</span>
+				<form th:action="@{/verifyBeforeLogin}" method="get" style="display:inline;">
+					<input type="hidden" name="email" th:value="${email}" />
+							<button type="submit">Verify</button>
+				</form>
+				<form th:action="@{/main}" method="get" style="display:inline;">
+							<button type="submit">Log in</button>
+				</form>
+	</div>
+    <div th:if="${error}">
+        <p th:text="${error}" style="color:#8B0000;" >Error message here</p>
+    </div>
+
+	</div>
+
+</body>
+</html>
