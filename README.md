@@ -1,6 +1,7 @@
 #Task Manager
 
 A simple and efficient task manager that helps you organize your daily tasks. Easily add, check off, and manage your to-do list to stay productive.
+Note: Due to the free plan on Heroku, there may be occasional delays or slower performance of the application.
 
 ## Table of Contents
 - [Live Demo](#live-demo)
